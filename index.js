@@ -9,14 +9,11 @@ const bodyParser = require('body-parser');
 const locationRouter = require('./api/router/location.router');
 
 // Sử dụng biến môi trường từ file .env (Heroku sẽ đặt biến môi trường trong hệ thống)
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://873quanglinhle_db_user:Linh%23123.@cluster0.wi3vclj.mongodb.net/iot-database?retryWrites=true&w=majority";
 
 // ✅ Dùng async/await thay cho callback
 async function connectDB() {
   try {
-    if (!MONGODB_URI) {
-      throw new Error('Missing MONGODB_URI environment variable');
-    }
     await mongoose.connect(MONGODB_URI);
     console.log('✅ Đã kết nối MongoDB');
   } catch (err) {
